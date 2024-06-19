@@ -5,17 +5,18 @@ class PackageSettings {
   final String outputFilepath;
 
   final List<String> supportedLocales;
+  final bool useContextAsPrefix;
 
   /// Constructs a new instance of [PackageSettings]
   PackageSettings({
     required this.inputFilepath,
     required String? outputFilepath,
-    required this.supportedLocales
-  })  : outputFilepath =
-      outputFilepath ?? PackageDefaultSettings.outputFilepath;
+    required this.supportedLocales,
+    this.useContextAsPrefix = false,
+  }) : outputFilepath = outputFilepath ?? PackageDefaultSettings.outputFilepath;
 
   /// Returns a String representation of the model.
   @override
   String toString() =>
-      '{inputFilepath: $inputFilepath, outputFilepath: $outputFilepath, supportedLocales: $supportedLocales';
+      '{inputFilepath: $inputFilepath, outputFilepath: $outputFilepath, supportedLocales: $supportedLocales, useContextAsPrefix: $useContextAsPrefix}';
 }

@@ -18,10 +18,11 @@ class Arb {
     this.items = const {},
   }) : lastModified = lastModified ?? DateTime.now();
 
-  factory Arb.fromArb(Map<String, dynamic> arb) {
+  factory Arb.fromArb(Map<String, dynamic> arb, bool useContextAsPrefix) {
+    final contextPrefix = arb['@@context'];
     final bundleItems = Map.fromEntries(
       arb.entries.where(
-            (entry) => !entry.key.startsWith('@@'),
+        (entry) => !entry.key.startsWith('@@'),
       ),
     );
 
@@ -37,8 +38,8 @@ class Arb {
 
     for (final item in bundleItems.entries) {
       if (item.key.startsWith('@')) continue;
-
-      final name = item.key;
+      final name =
+          useContextAsPrefix ? '${contextPrefix}${item.key}' : item.key;
       final value = item.value;
       final options = bundleItems['@$name'] ?? <String, dynamic>{};
 
@@ -54,13 +55,14 @@ class Arb {
     return _arb;
   }
 
-  factory Arb.fromFile(File file) =>
-      Arb.fromArb(json.decode(file.readAsStringSync()));
+  factory Arb.fromFile(File file, bool useContextAsPrefix) => Arb.fromArb(
+        json.decode(file.readAsStringSync()),
+        useContextAsPrefix,
+      );
 
   /// Get ARB format Object.
   SplayTreeMap<String, dynamic> get arb {
-    final SplayTreeMap<String, dynamic> _arb =
-    SplayTreeMap<String, dynamic>();
+    final SplayTreeMap<String, dynamic> _arb = SplayTreeMap<String, dynamic>();
     // _arb['@@last_modified'] = lastModified.toString();
 
     if (locale != null) {
@@ -89,8 +91,7 @@ class Arb {
     final otherKeys = other.items.map((item) => item.name).toSet();
     final newKeys = otherKeys.difference(keys);
     final newItems =
-    other.items.where((item) => newKeys.contains(item.name)).toSet();
-
+        other.items.where((item) => newKeys.contains(item.name)).toSet();
     return Arb(
       lastModified: DateTime.now(),
       author: author,
@@ -114,15 +115,15 @@ class ArbItem {
     String? description,
     Map<String, dynamic>? placeholders,
   }) : options = ArbItemOptions(
-    type: type,
-    description: description,
-    placeholders: placeholders,
-  );
+          type: type,
+          description: description,
+          placeholders: placeholders,
+        );
 
   /// Get ARB format Object.
   SplayTreeMap<String, dynamic> get arb {
     final SplayTreeMap<String, dynamic> _options =
-    SplayTreeMap<String, dynamic>();
+        SplayTreeMap<String, dynamic>();
     _options[name] = value;
 
     if (options.arb != null) {
@@ -148,7 +149,7 @@ class ArbItemOptions {
   /// Get ARB format Object.
   SplayTreeMap<String, dynamic>? get arb {
     final SplayTreeMap<String, dynamic> _options =
-    SplayTreeMap<String, dynamic>();
+        SplayTreeMap<String, dynamic>();
     if (type != null) {
       _options['type'] = type;
     }

@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:arb_merger/arb_merger.dart'
-    show PackageSettings;
+import 'package:arb_merger/arb_merger.dart' show PackageSettings;
 import 'package:yaml/yaml.dart';
 
 /// A class of arguments which the user can specify in pubspec.yaml
@@ -9,6 +8,7 @@ class YamlArguments {
   static const inputFilepath = 'input_filepath';
   static const outputFilepath = 'input_filepath';
   static const supportedLocales = 'supported_locales';
+  static const useContextAsPrefix = 'use_context_as_prefix';
 }
 
 /// A class which parses yaml
@@ -37,10 +37,16 @@ class YamlParser {
 
       final supportedLocales = yamlMap[YamlArguments.supportedLocales];
 
+      final useContextAsPrefix =
+          yamlMap[YamlArguments.useContextAsPrefix] != null
+              ? yamlMap[YamlArguments.useContextAsPrefix]
+              : false;
+
       return PackageSettings(
         supportedLocales: supportedLocales.toList().cast<String>(),
         inputFilepath: inputFilepath,
         outputFilepath: outputFilepath,
+        useContextAsPrefix: useContextAsPrefix,
       );
     }
 
