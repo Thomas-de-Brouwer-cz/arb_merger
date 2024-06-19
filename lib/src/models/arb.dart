@@ -38,8 +38,9 @@ class Arb {
 
     for (final item in bundleItems.entries) {
       if (item.key.startsWith('@')) continue;
-      final name =
-          useContextAsPrefix ? '${contextPrefix}${item.key}' : item.key;
+      final name = useContextAsPrefix
+          ? '${contextPrefix}${item.key.capitalize()}'
+          : item.key;
       final value = item.value;
       final options = bundleItems['@$name'] ?? <String, dynamic>{};
 
@@ -163,5 +164,11 @@ class ArbItemOptions {
     }
 
     return _options.length > 0 ? _options : null;
+  }
+}
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 }
