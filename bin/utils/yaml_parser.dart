@@ -6,7 +6,7 @@ import 'package:yaml/yaml.dart';
 /// A class of arguments which the user can specify in pubspec.yaml
 class YamlArguments {
   static const inputFilepath = 'input_filepath';
-  static const outputFilepath = 'input_filepath';
+  static const outputFilepath = 'output_filepath';
   static const supportedLocales = 'supported_locales';
   static const useContextAsPrefix = 'use_context_as_prefix';
 }
