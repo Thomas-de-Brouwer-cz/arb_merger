@@ -18,5 +18,5 @@ class PackageSettings {
   /// Returns a String representation of the model.
   @override
   String toString() =>
-      '{inputFilepath: ${inputFilepath.toString()}, outputFilepath: $outputFilepath, supportedLocales: $supportedLocales, useContextAsPrefix: $useContextAsPrefix}';
+      '{inputFilepath: ${inputFilepath}, outputFilepath: $outputFilepath, supportedLocales: $supportedLocales, useContextAsPrefix: $useContextAsPrefix}';
 }

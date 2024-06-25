@@ -11,5 +11,5 @@ class PackageSettings {
 
   @override
   String toString() =>
-      '{inputFilepath: ${inputFilepath.toString()}, outputFilepath: $outputFilepath';
+      '{inputFilepath: ${inputFilepath}, outputFilepath: $outputFilepath';
 }
