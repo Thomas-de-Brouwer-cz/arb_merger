@@ -44,7 +44,7 @@ class YamlParser {
 
       return PackageSettings(
         supportedLocales: supportedLocales.toList().cast<String>(),
-        inputFilepath: inputFilepath,
+        inputFilepath: inputFilepath.toList().cast<String>(),
         outputFilepath: outputFilepath,
         useContextAsPrefix: useContextAsPrefix,
       );

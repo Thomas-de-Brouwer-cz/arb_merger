@@ -1,7 +1,7 @@
 import '../../configs/package_default_settings.dart';
 
 class PackageSettings {
-  final String inputFilepath;
+  final List<String> inputFilepath;
   final String outputFilepath;
 
   final List<String> supportedLocales;
@@ -18,5 +18,5 @@ class PackageSettings {
   /// Returns a String representation of the model.
   @override
   String toString() =>
-      '{inputFilepath: $inputFilepath, outputFilepath: $outputFilepath, supportedLocales: $supportedLocales, useContextAsPrefix: $useContextAsPrefix}';
+      '{inputFilepath: ${inputFilepath.toString()}, outputFilepath: $outputFilepath, supportedLocales: $supportedLocales, useContextAsPrefix: $useContextAsPrefix}';
 }
