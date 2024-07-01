@@ -30,7 +30,8 @@ abstract class ARBMerger {
           print('Cannot find path specified which [${_directory.path}].');
           print(
               'Usage: merge_arbs [merged arb file path] [merge target arb file paths]');
-          exit(0);
+          // exit(0); // No need to exit script. Go to next iteration of For loop.
+          continue;
         }
 
         if (_directory.path.contains('.arb')) {
